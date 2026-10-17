@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Una pequeña sorpresa creada con cariño para alguien especial."
+  >
+
+  <meta name="theme-color" content="#fff0f5">
+
+  <title>Un regalo para ti 💗</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Decoración de fondo -->
+  <div class="background-glow" aria-hidden="true"></div>
+  <div id="hearts-container" aria-hidden="true"></div>
+  <div id="confetti-container" aria-hidden="true"></div>
+
+  <main class="app">
+    <section class="intro" id="intro">
+      <span class="eyebrow">✦ UN PEQUEÑO DETALLE ✦</span>
+
+      <h1>Hay algo para ti<span class="pink-dot">.</span></h1>
+
+      <p class="subtitle">
+        Preparé algo especial, solo tienes que abrirlo.
+      </p>
+
+      <div class="gift-scene">
+        <span class="sparkle sparkle-one" aria-hidden="true">✧</span>
+        <span class="sparkle sparkle-two" aria-hidden="true">✦</span>
+        <span class="sparkle sparkle-three" aria-hidden="true">♡</span>
+
+        <button
+          class="gift-button"
+          id="gift-button"
+          type="button"
+          aria-label="Abrir el regalo sorpresa"
+          aria-controls="surprise"
+        >
+          <span class="gift" id="gift">
+            <span class="gift-lid"></span>
+            <span class="gift-bow"></span>
+            <span class="gift-box">
+              <span class="gift-heart">♥</span>
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <p class="hint" id="hint" aria-live="polite">
+        Toca el regalo para descubrir tu sorpresa 💌
+      </p>
+
+      <button class="primary-button" id="open-button" type="button">
+        Abrir mi regalo <span aria-hidden="true">♡</span>
+      </button>
+    </section>
+
+    <!-- Sorpresa oculta hasta abrir el regalo -->
+    <section
+      class="surprise hidden"
+      id="surprise"
+      aria-labelledby="surprise-title"
+      aria-hidden="true"
+      inert
+    >
+      <div class="letter-card">
+        <div class="letter-decoration" aria-hidden="true">
+          <span>♡</span>
+          <span>✿</span>
+          <span>♡</span>
+        </div>
+
+        <p class="letter-label">PARA ALGUIEN MUY ESPECIAL</p>
+
+        <div class="flower" aria-hidden="true">🌷</div>
+
+        <h2 id="surprise-title">
+          Para ti, <span id="recipient-name">persona especial</span> 💗
+        </h2>
+
+        <div class="letter-content">
+          <p>
+            Tal vez este regalo sea pequeño, pero está lleno de cariño.
+            Quería crear algo diferente para recordarte que las cosas
+            más bonitas no siempre necesitan ser grandes.
+          </p>
+
+          <p>
+            A veces basta una sonrisa, un pequeño detalle o unas palabras
+            sinceras para hacer que un día sea mucho más bonito.
+          </p>
+
+          <p class="final-message">
+            Gracias por hacer que el mundo tenga un poquito más de luz.
+            ✨
+          </p>
+        </div>
+
+        <div class="signature">
+          Con mucho cariño,
+          <span id="sender-name">Alguien que piensa en ti</span>
+        </div>
+
+        <div class="card-footer" aria-hidden="true">
+          <span>♡</span>
+          <span>Hecho con amor</span>
+          <span>♡</span>
+        </div>
+      </div>
+
+      <button class="secondary-button" id="replay-button" type="button">
+        ↻ Volver a la sorpresa
+      </button>
+    </section>
+
+    <footer class="footer">
+      Hecho con <span aria-label="amor">♥</span> y un poquito de magia
+    </footer>
+  </main>
+</body>
+</html>

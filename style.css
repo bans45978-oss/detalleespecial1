@@ -1,0 +1,699 @@
+
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN GENERAL
+========================================= */
+
+:root {
+  --pink: #f28eb5;
+  --pink-dark: #d65d91;
+  --pink-light: #fff0f5;
+  --lavender: #eee7ff;
+  --cream: #fffaf5;
+  --text: #62475b;
+  --muted: #997c92;
+  --white: #ffffff;
+  --shadow: 0 18px 60px rgba(190, 112, 157, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--text);
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      #ffe0ec 0,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      #e8e2ff 0,
+      transparent 35%
+    ),
+    linear-gradient(145deg, #fff8fb, #fff0f5 55%, #f8f1ff);
+
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid #b86bd0;
+  outline-offset: 5px;
+}
+
+.background-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.48),
+      transparent 65%
+    );
+}
+
+/* =========================================
+   2. ESTRUCTURA PRINCIPAL
+========================================= */
+
+.app {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 100svh;
+  padding: 48px 20px 24px;
+}
+
+.intro {
+  width: 100%;
+  max-width: 680px;
+  text-align: center;
+
+  animation: fade-in 0.9s ease both;
+}
+
+.eyebrow,
+.letter-label {
+  color: var(--pink-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+h1 {
+  margin: 17px 0 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 7vw, 4.7rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+}
+
+.pink-dot {
+  color: var(--pink);
+}
+
+.subtitle {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* =========================================
+   3. ESCENA Y CAJA DE REGALO
+========================================= */
+
+.gift-scene {
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  width: min(100%, 340px);
+  height: 290px;
+  margin: 8px auto 0;
+}
+
+.gift-button {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 250px;
+  height: 250px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gift-button:active .gift {
+  transform: scale(0.96);
+}
+
+.gift {
+  position: relative;
+  display: block;
+  width: 176px;
+  height: 164px;
+  transform-origin: center bottom;
+  animation: gift-bounce 2.5s ease-in-out infinite;
+  transition: transform 0.35s ease;
+}
+
+.gift-box {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 116px;
+  overflow: hidden;
+
+  border: 1px solid rgba(209, 98, 145, 0.15);
+  border-radius: 8px 8px 15px 15px;
+
+  background: linear-gradient(
+    100deg,
+    #e978a6 0%,
+    #f6a4c3 48%,
+    #e981ae 100%
+  );
+
+  box-shadow:
+    inset 12px 0 16px rgba(255, 255, 255, 0.13),
+    inset -12px 0 16px rgba(159, 48, 98, 0.08),
+    0 18px 24px rgba(184, 92, 138, 0.15);
+}
+
+.gift-box::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 42%;
+
+  width: 25px;
+  content: "";
+
+  background: linear-gradient(
+    90deg,
+    #fff0bc,
+    #fff8dc,
+    #f3d991
+  );
+}
+
+.gift-lid {
+  position: absolute;
+  z-index: 3;
+  top: 35px;
+  left: -10px;
+
+  width: 196px;
+  height: 36px;
+
+  border: 1px solid rgba(209, 98, 145, 0.1);
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    #ffc0d7,
+    #f18db4
+  );
+
+  box-shadow: 0 6px 10px rgba(184, 92, 138, 0.12);
+  transform-origin: 15% 100%;
+}
+
+.gift-lid::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent 43%,
+    rgba(255, 248, 220, 0.85) 43%,
+    rgba(255, 248, 220, 0.85) 57%,
+    transparent 57%
+  );
+}
+
+.gift-bow {
+  position: absolute;
+  z-index: 4;
+  top: 7px;
+  left: 50%;
+
+  width: 74px;
+  height: 39px;
+  transform: translateX(-50%);
+}
+
+.gift-bow::before,
+.gift-bow::after {
+  position: absolute;
+  top: 0;
+
+  width: 35px;
+  height: 29px;
+  content: "";
+
+  border: 5px solid #fff0bc;
+  border-radius: 50% 50% 45% 15%;
+}
+
+.gift-bow::before {
+  left: 0;
+  transform: rotate(28deg);
+}
+
+.gift-bow::after {
+  right: 0;
+  transform: scaleX(-1) rotate(28deg);
+}
+
+.gift-heart {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  z-index: 2;
+
+  color: #fff3f8;
+  font-size: 22px;
+  transform: translateX(-50%);
+}
+
+/* =========================================
+   4. ESTRELLAS Y CORAZONES FLOTANTES
+========================================= */
+
+.sparkle {
+  position: absolute;
+  z-index: 1;
+  color: #e9a3c4;
+  font-size: 2rem;
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+.sparkle-one {
+  top: 38px;
+  left: 35px;
+}
+
+.sparkle-two {
+  top: 65px;
+  right: 28px;
+  color: #c2a9ed;
+  animation-delay: 0.5s;
+}
+
+.sparkle-three {
+  right: 38px;
+  bottom: 45px;
+  color: #ed91b7;
+  animation-delay: 1s;
+}
+
+.hint {
+  min-height: 28px;
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 50px;
+  padding: 14px 27px;
+
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.primary-button {
+  border: 1px solid transparent;
+  color: white;
+  background: linear-gradient(135deg, #ec86ae, #d96e9d);
+  box-shadow: 0 9px 24px rgba(217, 110, 157, 0.25);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  transform: translateY(-3px);
+}
+
+.primary-button:hover {
+  box-shadow: 0 13px 28px rgba(217, 110, 157, 0.35);
+}
+
+.secondary-button {
+  margin-top: 25px;
+  border: 1px solid #f1c5da;
+  color: var(--pink-dark);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================
+   5. TARJETA DE LA DEDICATORIA
+========================================= */
+
+.surprise {
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.letter-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 6vw, 48px);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 5px rgba(255, 240, 245, 0.6);
+
+  backdrop-filter: blur(12px);
+  animation: letter-appear 0.8s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.letter-decoration {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+  color: #e8a2c1;
+  font-size: 1.25rem;
+}
+
+.letter-decoration span:nth-child(2) {
+  color: #b9a5e8;
+}
+
+.flower {
+  margin: 20px 0 8px;
+  font-size: 3rem;
+  animation: flower-sway 3s ease-in-out infinite;
+}
+
+.letter-card h2 {
+  margin: 12px 0 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+#recipient-name {
+  color: var(--pink-dark);
+}
+
+.letter-content {
+  color: #80677b;
+  font-size: 0.96rem;
+  line-height: 1.9;
+}
+
+.letter-content p {
+  margin: 0 0 17px;
+}
+
+.final-message {
+  color: #a2537c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.12rem;
+  font-style: italic;
+}
+
+.signature {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+#sender-name {
+  color: var(--pink-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-style: italic;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+  color: #d990b3;
+  font-size: 0.8rem;
+}
+
+/* =========================================
+   6. CONTENEDORES DE EFECTOS
+========================================= */
+
+#hearts-container,
+#confetti-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#hearts-container {
+  z-index: 0;
+}
+
+#confetti-container {
+  z-index: 5;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -40px;
+  color: #ec9fc2;
+  opacity: 0;
+  animation: float-up var(--duration, 7s) linear forwards;
+  will-change: transform, opacity;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 9px;
+  height: 14px;
+  border-radius: 3px;
+  animation: confetti-fall var(--duration, 3s) ease-in forwards;
+  will-change: transform, opacity;
+}
+
+/* =========================================
+   7. PIE DE PÁGINA
+========================================= */
+
+.footer {
+  margin-top: 45px;
+  color: #ac91a5;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.footer span {
+  color: #e47ea9;
+}
+
+/* =========================================
+   8. ANIMACIONES
+========================================= */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gift-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.4;
+    transform: scale(0.8) rotate(-10deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.15) rotate(10deg);
+  }
+}
+
+@keyframes letter-appear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes flower-sway {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(0);
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  85% {
+    opacity: 0.65;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 20px), -110vh, 0)
+      rotate(35deg);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 30px), 105vh, 0)
+      rotate(720deg);
+  }
+}
+
+/* =========================================
+   9. DISEÑO ADAPTABLE A MÓVILES
+========================================= */
+
+@media (max-width: 600px) {
+  .app {
+    padding: 35px 18px 22px;
+  }
+
+  h1 {
+    font-size: clamp(2.3rem, 10vw, 3.3rem);
+  }
+
+  .gift-scene {
+    height: 255px;
+  }
+
+  .gift-button {
+    width: 230px;
+    height: 230px;
+  }
+
+  .letter-card {
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  .letter-content {
+    font-size: 0.91rem;
+  }
+
+  .footer {
+    margin-top: 35px;
+  }
+}
+
+@media (max-width: 360px) {
+  .app {
+    padding-inline: 12px;
+  }
+
+  .gift-scene {
+    height: 225px;
+  }
+
+  .gift-button {
+    transform: scale(0.88);
+  }
+
+  .letter-card {
+    padding: 25px 17px;
+  }
+}
+
+/* =========================================
+   10. ACCESIBILIDAD: MENOS MOVIMIENTO
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
